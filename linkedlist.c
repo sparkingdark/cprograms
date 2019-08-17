@@ -107,7 +107,11 @@ void at_last_node(int item)
    // struct node *temp=(struct node*)malloc(sizeof(struct node));
 
     p=start;
-
+    if(start==NULL)
+    {
+        printf("no node created");
+        return;
+    }
     while(p->next!=NULL)
     {
         p=p->next;
@@ -120,16 +124,16 @@ void at_last_node(int item)
 
 }
 
-void at_any_index(int pos)
+void at_any_index(int item,int pos)
 
  {
 
   //  struct node *temp=(struct node*)malloc(sizeof(struct node));
-
+    
     int i=1;
 
     p=start;
-
+    printf("position:%d",pos);
     while(i<pos-1)
     {
         p=p->next;
@@ -137,6 +141,7 @@ void at_any_index(int pos)
     }
 
     temp->next=p->next;
+    p->data=item;
     p->next=temp;
 }
 
@@ -145,7 +150,11 @@ void at_any_value(int item)
     p=start;
    // struct node *temp=(struct node*)malloc(sizeof(struct node));
 
-
+    if(start==NULL)
+    {
+        printf("no element");
+        return;
+    }
     while(p!=NULL)
     {
         if(p->data==item)
@@ -165,6 +174,11 @@ void del_begin()
 //struct node *temp=(struct node*)malloc(sizeof(struct node));
 
         temp=start;
+        if(start==NULL)
+        {
+            printf("no element");
+            return;
+        }
         start=temp->next;
 
         free(temp);
@@ -178,7 +192,11 @@ void del_last()
     //struct node *temp=(struct node*)malloc(sizeof(struct node));
     int i=1;
     p=start;
-
+    if(start==NULL)
+        {
+            printf("no element");
+            return;
+        }
     while(p->next->next!=NULL)
     {
         p=p->next;
@@ -196,7 +214,13 @@ void del_any(int pos)
 
     int i=1;
     p=start;
-
+     
+     if(start==NULL)
+        {
+            printf("no element");
+            return;
+        }
+        
     while(i<pos-1)
     {
         p=p->next;
@@ -212,7 +236,7 @@ void del_any(int pos)
 int main()
 {
         struct node *temp=(struct node*)malloc(sizeof(struct node));
-        int s,item;
+        int s,item,pos;
         temp=(struct node*)malloc(sizeof(struct node));
 
         while(true)
@@ -239,9 +263,9 @@ int main()
                 case 6:scanf("%d",&item);
                        at_last_node(item);
                        break;
-                case 7:printf("enter a position to enter:\n");
-                       scanf("%d",&item);
-                       at_any_index(item);
+                case 7:printf("enter a position and data to enter:\n");
+                       scanf("%d\n %d",&pos,&item);
+                       at_any_index(pos,item);
                        break;
                 case 8: printf("enter a position to enter:\n");
                        scanf("%d",&item);
@@ -269,3 +293,4 @@ int main()
 
 
 }
+
