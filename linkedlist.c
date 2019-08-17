@@ -17,10 +17,10 @@ void insertion(int item)
  struct node *temp=(struct node*)malloc(sizeof(struct node));
 
     temp->data=item;
+    temp->next=NULL;
 
     if(start==NULL)
     {
-        temp->next=NULL;
         start=temp;
     }
     else
@@ -29,10 +29,12 @@ void insertion(int item)
         while(p->next!=NULL)
         {
             p=p->next;
-            p->next=temp;
         }
+            p->next=temp;
+
     }
 }
+
 
 void display()
 {
@@ -77,7 +79,7 @@ void linear_search_list(int ele)
     }
 
 }
-/*
+
 void reverse()
 {
     struct node *p1,*p2,*p3;
@@ -206,10 +208,10 @@ void del_any(int pos)
 
     free(temp);
 }
-*/
+
 int main()
 {
-        //struct node *temp=(struct node*)malloc(sizeof(struct node);
+        struct node *temp=(struct node*)malloc(sizeof(struct node));
         int s,item;
         temp=(struct node*)malloc(sizeof(struct node));
 
@@ -232,7 +234,7 @@ int main()
                 case 4:scanf("%d",&item);
                        linear_search_list(item);
                        break;
-               /* case 5:reverse();
+                case 5:reverse();
                        break;
                 case 6:scanf("%d",&item);
                        at_last_node(item);
@@ -252,7 +254,7 @@ int main()
                 case 11:printf("enter a position to delete:\n");
                         scanf("%d",&item);
                         del_any(item);
-                        break;*/
+                        break;
                 default:printf("end");
                         break;
 
