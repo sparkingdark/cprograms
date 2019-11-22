@@ -8,12 +8,14 @@ typedef struct q_9
 }*node;
 
 node head=NULL;
+node tail=NULL;
 
 node newnode(int x);
 void node_add(int x);
-node delete_front();
+void delete_front();
 void count();
 void display();
+void delete_last();
 
 int main() {
 
@@ -25,7 +27,8 @@ int main() {
         printf("\n\t 1-->for add data:");
         printf("\n\t 2-->for delete data:");
         printf("\n\t 3-->for count node:");
-        printf("\n\t 4-->for display data:");
+        printf("\n\t 4-->for delete from last data:");
+        printf("\n\t 5-->for display data:");
         printf("\n please enter a choice:");
         scanf("%d",&choice);
         switch (choice)
@@ -38,8 +41,10 @@ int main() {
                 case 2:delete_front();
                         break;
                 case 3: count();
-                        break;       
-                case 4:display();
+                        break;    
+                case 4: delete_last();
+                        break;              
+                case 5:display();
                         break;      
                 default:
                         break;
@@ -47,7 +52,7 @@ int main() {
 
 
 
-        if (choice==5)
+        if (choice==6)
             {
                 printf("you are exited from loop:\n");
                 break;
@@ -61,86 +66,78 @@ node newnode(int x)
 {
     node temp=(node)malloc(sizeof(node));
     temp->data=x;
+    temp->link=NULL;
     return temp;
 }
 
 void node_add(int x)
 {
-    node p=head;
-    node new=newnode(x);
+    node temp=newnode(x);
 
-    if (p==NULL)
+    if(head==NULL)
     {
-        p=new;
+        head=temp;
+        tail=temp;
+        temp=NULL;
+        return;
+    }
+    else
+    {
+        tail->link=temp;
+        tail=temp;
     }
 
-    if(p!=NULL)
-    {
-        node wor=new;
-        while (p->link!=NULL)
-        {
-            p=p->link;
-        }
-
-        printf("node added succesfully\n");
-        p->link=wor;
-        p=head;
-        
-    }
-    
-}
-
-node delete_front()
-{
-    node p=head;
-    head=p->link;
-    free(p);
-    return head;
-}
-
-void count()
-{
-    int i=0;
-
-    node p=head;
-
-    while (p!=NULL)
-    {
-        i++;
-        p=p->link;
-    }
-
-    printf("\n\t the total  number of node is:%d",i);
-    
 }
 
 void display()
 {
     node p=head;
-    if(p==NULL)
+    while (p!=NULL)
     {
-        printf("empty list;}");
+        printf("%d\t",p->data);
+        p=p->link;
     }
-    
-    
-         while(p!=NULL)
-        {
-            printf("\n the data is-->%d",p->data);
-            p=p->link;
-        }
-    
-   
 }
 
-node display1(node p)
+void count()
 {
-    p=head;
-
-    if(p==NULL)
+    node p=head;
+    if (p==NULL)
     {
-        printf("%d",p->data);
-        return p;
+        printf("no element present here\n");
     }
-    display1(p->link);
-    return NULL;
+
+    int i=0;
+    while(p!=NULL)
+    {
+        i++;
+        p=p->link;
+    }
+
+    printf("here is %d nodes are present\n",i);
 }
+
+void delete_front()
+{
+   node temp=head;
+   head=head->link;
+   free(temp);
+   printf("\n memory freed");
+   
+
+}
+
+void delete_last()
+{
+    node temp=tail;
+    node p=head;
+    
+
+    while(p->link->link!=NULL)p=p->link;
+
+    tail=p->link;
+
+    free(temp);
+    printf("memory freed\n");
+}
+
