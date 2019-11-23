@@ -4,7 +4,7 @@
 typedef struct q_9
 {
     int data;
-    struct q_9 *link;
+    struct q_9 *link; 
 }*node;
 
 node head=NULL;
