@@ -90,6 +90,7 @@ void insert(int data)
        p->next=NULL;
        tail=p;
        tail->prev=p;
+       
 
        printf("niode inserted successfully \n");
 
